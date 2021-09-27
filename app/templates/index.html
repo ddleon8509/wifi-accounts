@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <title>LHC Account Creation</title>
+  </head>
+  <body>
+    <div class="container-fluid">
+        </br>
+        <div class="row">
+            <p>
+              Import a CSV using <a href="{{ url_for('static', filename = 'example.csv') }}" class="text-link">this format</a>. </br>
+              Please <a href="{{ url_for('download') }}" class="text-link">backup</a> the User Group before perform any operation. </br>
+              {% if logs.total > 0 %}
+                <a href="{{ url_for('discard', param = 'log') }}" class="text-link">Save</a> the log after complete the operations.
+              {%endif%}
+              
+            </p>
+            <form method="POST" action="" enctype="multipart/form-data">
+              <div class="input-group">
+                  <input type="file" name="file" class="form-control-sm" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                  <button class="btn-sm btn-outline-secondary" type="submit" value="submit" id="inputGroupFileAddon04">Button</button>
+              </div>
+          </form>
+        </div>
+        </br>
+        <div class="row">
+            <p class="h4">Results:</p>
+            <p> 
+              {% if counters.new > 0 %}
+                {{ counters.new }} New users. <a href="{{ url_for('new') }}" class="text-link">Create all</a> | <a href="{{ url_for('discard', param = 'new') }}" class="text-link">Discard Changes</a>
+              {%endif%}
+              {% if counters.notify > 0 %}
+                {{ counters.notify }} Existing users. <a href="{{ url_for('notify') }}" class="text-link">Notify all</a> | <a href="{{ url_for('discard', param = 'notify') }}" class="text-link">Discard Changes</a>
+              {%endif%}
+              {% if counters.prev > 0 %}
+                {{ counters.prev }} Previous users. <a href="#" class="text-link">Delete all</a> | <a href="#" class="text-link">Discard Changes</a>
+              {%endif%}
+            </p>
+        </div>
+        <div class="row">
+            <p class="h4">Logs ({{ logs.total }}):</p>
+            {% for log in logs.data %}
+              <p class="h6">{{ log.dt }}: {{ log.t }} - {{ log.d }}</p>
+            {% endfor %}
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+  </body>
+</html>
