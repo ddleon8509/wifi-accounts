@@ -1,2 +1,2 @@
 
-Bulk operations (CREATE, NOTIFY, DELETE) for user accounts on the LHC ssid.
+Bulk operations (CREATE, NOTIFY, DELETE) for user accounts using PPK.
